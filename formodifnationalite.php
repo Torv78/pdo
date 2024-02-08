@@ -1,11 +1,12 @@
 <?php include "headerbiblio.php"; 
 
 include "connexion-pdo.php";
+$num=$_GET['num'];
 $req=$monPdo->prepare("select*from nationalite where num= :num");
 $req->setFetchMode(PDO::FETCH_OBJ);
+$req->bindparam(':num',$num);
 $req->execute();
-$lesnationalites=$req->fetchAll();
-$num=$_GET['num']
+$lanationalite=$req->fetch();
 ?>
 <div class="container mt-5">
 
@@ -14,9 +15,9 @@ $num=$_GET['num']
         class="col-md-6 offset-md-3 border border-danger p-3 rounded">
         <div class="form-group">
             <label for='libelle'> libellé </label>
-            <input type="text" class='form-control' id='libelle' placehoder='saisir le libellé' name='libelle'>
+            <input type="text" class='form-control' id='libelle' placehoder='saisir le libellé' name='libelle' value ="<?php echo $lanationalite -> libelle ; ?>">
         </div>
-        <input type="hiden" id="num" name="num">
+        <input type="hidden" id="num" name="num" value="<?php echo $lanationalite -> num ; ?>">
         <div class="row">
             <div class="col"><a href="listenationalite.php" class='btn btn-warning btn-block'> revenir a la liste </a>
             </div>

@@ -1,14 +1,20 @@
 <?php include "headerbiblio.php"; 
 include "connexion-pdo.php";
+$action=$GET['action'];
 $num=$_POST['num'];
 $libelle=$_POST['libelle'];
 
+if($action=="modifier"){
 $req=$monPdo->prepare("update nationalite set libelle = :libelle where num = :num");
 $req->bindparam(':num', $num);
 $req->bindparam(':libelle', $libelle);
+}else{
+    $req=$monPdo->prepare("insert into nationalite(libelle) values(:libelle)");
+$req->bindparam(':libelle',$libelle);
+}
 $nb=$req->execute();
 
-
+$mmessage= $action == "modifier" ? "modifiée" : "ajoutée" ;
 
 echo '<div class="container mt-5">';
 echo '<div class="row">
@@ -16,12 +22,12 @@ echo '<div class="row">
 
 if($nb==1)
 { echo'<div class="alert alert-dismissible alert-primary">
-    la nationalité a bien été modifier
+    la nationalité a bien été '. $mmessage .'
 </div>';
 
 }else{
     echo'<div class="alert alert-dismissible alert-primary">
-    la nationalité n\'a pas  bien été modifier
+    la nationalité n\'a pas  bien été '. $mmessage .'
 </div>';
 }?></div>
 </div>
