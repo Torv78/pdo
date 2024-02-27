@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!doctype html>
 <html lang="en">
 
@@ -68,7 +69,7 @@
                             class="fa-solid fa-book"></i> gestion des genre</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="listegenre.php">liste des genres</a>
-                        <a class="dropdown-item" href="formajoutgenre.php">Ajouter un genre</a>
+                        <a class="dropdown-item" href="formgenre.php">Ajouter un genre</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -85,7 +86,7 @@
                             class="fa-solid fa-flag"></i> gestion des nationalités</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="listenationalite.php">liste des nationalités</a>
-                        <a class="dropdown-item" href="formajoutnationalite.php">Ajouter une nationalités</a>
+                        <a class="dropdown-item" href="formnationalite.php">Ajouter une nationalités</a>
                     </div>
                 </li>
             </ul>

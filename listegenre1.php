@@ -1,9 +1,10 @@
+
 <?php include "headerbiblio.php"; 
 include "connexion-pdo.php";
-$req=$monPdo->prepare("select n.num,n.libelle as 'libnation', c.libelle as 'libcontinent'  from nationalite n, continent c where n.numContinent=c.num order by n.libelle");
+$req=$monPdo->prepare("select*from genre");
 $req->setFetchMode(PDO::FETCH_OBJ);
 $req->execute();
-$lesnationalites=$req->fetchAll();
+$lesgenres=$req->fetchAll();
 
 if(!empty($_SESSION['message'])){
   $mesmessages=$_SESSION['message'];
@@ -26,9 +27,9 @@ if(!empty($_SESSION['message'])){
 
     <div class="row pt-3">
         <div class="col-9"></div>
-        <h2>LISTE DE nationalite</h2>
-        <div class="col-3"><a href="formnationalite.php?action=ajouter" class='btn btn-sucess'><i
-                    class="fas fa-plus-circle"></i>créer une nationalité </a> </div>
+        <h2>LISTE DE GENRE</h2>
+        <div class="col-3"><a href="formgenre.php?action=ajouter" class='btn btn-sucess'><i
+                    class="fas fa-plus-circle"></i>créer un genre </a> </div>
 
     </div>
     <table class="table table-hover">
@@ -36,22 +37,20 @@ if(!empty($_SESSION['message'])){
             <tr>
                 <th scope="col" class="col-md-2">Numero</th>
                 <th scope="col" class="col-md-8">libellé</th>
-                <th scope="col" class="col-md-8">continent</th>
                 <th scope="col" class="col-md-2">action</th>
 
             </tr>
         </thead>
         <tbody>
             <?php
-    foreach($lesnationalites as $nationalite)
+    foreach($lesgenres as $genre)
     {
      echo "<tr>";
-     echo "<td>$nationalite->num</td>";
-     echo "<td>$nationalite->libnation</td>";
-     echo "<td>$nationalite->libcontinent</td>";
+     echo "<td>$genre->num</td>";
+     echo "<td>$genre->libnation</td>";
      echo "<td>
-          <a href='formnationalite.php?action=modifier&num=$nationalite->num' class='btn btn-primary'><i class='fas fa-pen'></i></a>
-          <a href='#modalsuppression' data-suppression='supprimernationalite.php?num=$nationalite->num' data-toggle='modal' data-message='voulez vous supprimer cette nationalite' class='btn btn-danger'><i class='fa fa-trash'></i></a>
+          <a href='formgenre.php?action=modifier&num=$genre->num' class='btn btn-primary'><i class='fas fa-pen'></i></a>
+          <a href='#modalsuppression' data-suppression='supprimergenre.php?num=$genre->num' data-toggle='modal' data-message='voulez vous supprimer ce genre' class='btn btn-danger'><i class='fa fa-trash'></i></a>
      
      </td>";
      echo "</tr>";
